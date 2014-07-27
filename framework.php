@@ -86,22 +86,22 @@ class functions {
         return strtoupper(uniqid(strtoupper($var) . '_'));
     }
 
-    function session_set($var, $id) {
-        $_SESSION[$id] = $var;
-    }
-
-    function session_get($id) {
-        $return = $_SESSION[$id];
-        return $return;
-    }
-
-    function session_unset($id) {
-        unset($_SESSION[$id]);
-    }
-
-    function session_kill() {
-        session_destroy();
-    }
+//    function session_set($var, $id) {
+//        $_SESSION[$id] = $var;
+//    }
+//
+//    function session_get($id) {
+//        $return = $_SESSION[$id];
+//        return $return;
+//    }
+//
+//    function session_unset($id) {
+//        unset($_SESSION[$id]);
+//    }
+//
+//    function session_kill() {
+//        session_destroy();
+//    }
 
     //this can be used for protection also, because it converts tags into enties which mysql is uneffected by these.
     function html($var) {

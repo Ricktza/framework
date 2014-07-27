@@ -1,13 +1,13 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+<?php
+include "config.php"; // This could be done a nicer way to prevent needing to do ../ etc
+include "framework.php"; 
+
+
+?>
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <title>Examples...</title>
     </head>
     <body>
         <?php
