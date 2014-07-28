@@ -1,4 +1,5 @@
 <?php
+
 ob_start();
 declare(encoding = 'UTF-8');
 $start_time = microtime(true); // starts the counter
@@ -26,6 +27,18 @@ class database {
         $protected = mysqli_real_escape_string($link, $var);
         return $protected;
     }
+    //testing...
+    function prepared_connect($DBhostname, $DBusername, $DBpassword, $DBdatabase){
+        global $db;
+        $db = new PDO("mysql:dbname=".$DBdatabase.";host=".$DBhostname."", $DBusername, $DBpassword);
+    }
+    //testing...
+    function prepared_query($query, $array){
+        global $db;
+        $sql=$db->prepare($query);
+        $sql->execute(array($array));
+        return $sql;
+    }   
 
     function query($query, $type) {
         global $link;
@@ -102,7 +115,6 @@ class functions {
 //    function session_kill() {
 //        session_destroy();
 //    }
-
     //this can be used for protection also, because it converts tags into enties which mysql is uneffected by these.
     function html($var) {
         $var = htmlentities($var);
@@ -191,8 +203,8 @@ class functions {
         }
     }
 
-    function encyption_input($input) {
-        $hash = hash('sha512', $input);
+    function encyption_input($input, $salt) {
+        $hash = hash('sha512', $input.$salt);
         return $hash;
     }
 
@@ -231,7 +243,6 @@ class functions {
         if ($response === false) {
             throw new Exception("Problem reading data from $url, $php_errormsg");
         }
-
         return $response;
     }
 
@@ -249,11 +260,6 @@ class functions {
 
     function decompress($var) {
         return gzuncompress($var);
-    }
-
-    function execution_time() {
-        Global $start_time;
-        return round(microtime(true) - $start_time, 4);
     }
 
     function get_ip() {
@@ -530,6 +536,11 @@ class functions {
             $tense = '';
         }
         return "$difference " . $periods[$j] . " $tense";
+    }
+
+    function execution_time() {
+        Global $start_time;
+        return round(microtime(true) - $start_time, 4);
     }
 
 }
