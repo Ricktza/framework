@@ -1,6 +1,7 @@
 <?php
-include "config.php"; // This could be done a nicer way to prevent needing to do ../ etc
-include "framework.php"; 
+include "config.php";
+include "framework.php";
+$functions = new functions();
 ?>
 <html>
     <head>
@@ -9,7 +10,7 @@ include "framework.php";
     </head>
     <body>
         <?php
-        // put your code here
+        // Your code here.
         ?>
     </body>
 </html>

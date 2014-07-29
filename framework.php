@@ -1,7 +1,6 @@
 <?php
 
 ob_start();
-declare(encoding = 'UTF-8');
 $start_time = microtime(true); // starts the counter
 
 class database {
@@ -26,7 +25,7 @@ class database {
         global $link;
         $protected = mysqli_real_escape_string($link, $var);
         return $protected;
-    } 
+    }
 
     function query($query, $type) {
         global $link;
@@ -62,16 +61,17 @@ class database {
         }
         $result->close();
     }
-    
-        //testing...
-    function prepared_connect($DBhostname, $DBusername, $DBpassword, $DBdatabase){
-        global $db;
-        $db = new PDO("mysql:dbname=".$DBdatabase.";host=".$DBhostname."", $DBusername, $DBpassword);
-    }
+
     //testing...
-    function prepared_query($query, $array){
+    function prepared_connect($DBhostname, $DBusername, $DBpassword, $DBdatabase) {
         global $db;
-        $sql=$db->prepare($query);
+        $db = new PDO('mysql:dbname=' . $DBdatabase . ';host=' . $DBdatabase . '', $DBusername, $DBpassword);
+    }
+
+    //testing...
+    function prepared_query($query, $array) {
+        global $db;
+        $sql = $db->prepare($query);
         $sql->execute(array($array));
         return $sql;
     }
@@ -95,6 +95,7 @@ class functions {
     function functions() {
 //$args = func_get_args(); 
     }
+
     //good for urls or salts maybe.
     function unique_id($var) {
         return strtoupper(uniqid(strtoupper($var) . '_'));
@@ -144,6 +145,7 @@ class functions {
                 'X-Mailer: PHP/' . phpversion();
         mail($to, $subject, $message, $headers);
     }
+
     //useful for salts or random IDs etc
     function randstr($length) {
         $randstr = "";
@@ -205,7 +207,7 @@ class functions {
     }
 
     function encyption_input($input, $salt) {
-        $hash = hash('sha512', $input.$salt);
+        $hash = hash('sha512', $input . $salt);
         return $hash;
     }
 
@@ -599,3 +601,4 @@ if (define('APC_EXTENSION_LOADED', extension_loaded('apc') && ini_get('apc.enabl
 
 }
 ob_clean();
+?>
