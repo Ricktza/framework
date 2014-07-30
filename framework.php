@@ -65,17 +65,20 @@ class database {
     //testing...
     function prepared_connect($DBhostname, $DBusername, $DBpassword, $DBdatabase) {
         global $db;
-        $db = new PDO('mysql:dbname=' . $DBdatabase . ';host=' . $DBdatabase . '', $DBusername, $DBpassword);
+        $db = new PDO('mysql:dbname=' . $DBdatabase . ';host=' . $DBhostname . '', $DBusername, $DBpassword);
     }
 
     //testing...
     function prepared_query($query, $array) {
         global $db;
         $sql = $db->prepare($query);
-        $sql->execute(array($array));
+        $sql->execute($array);
         return $sql;
     }
 
+    
+    
+    
 }
 
 class functions {
