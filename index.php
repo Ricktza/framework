@@ -2,6 +2,7 @@
 include "config.php";
 include "framework.php";
 $functions = new functions();
+$functions->errors(0); // 0 off, 1 on
 $database = new database($DBhostname, $DBusername, $DBpassword, $DBdatabase);
 ?>
 <html>
@@ -11,7 +12,7 @@ $database = new database($DBhostname, $DBusername, $DBpassword, $DBdatabase);
     </head>
     <body>
         <?php
-        $functions->errors(0); // 0 off, 1 on
+        echo '<br>';
         echo $functions->unique_id("ID");
         echo '<br>';
         echo $functions->html('<a href="http://google.com" target="_blank">Google.</a>');
