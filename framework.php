@@ -2,7 +2,7 @@
 ob_start();
 class MyDatabase {
 
-    function database($DBhostname, $DBusername, $DBpassword, $DBdatabase) { //didn't think it would act as a constructor 
+    function MyDatabase($DBhostname, $DBusername, $DBpassword, $DBdatabase) { //didn't think it would act as a constructor 
         global $link;
         $link = mysqli_connect($DBhostname, $DBusername, $DBpassword, $DBdatabase);
         if (mysqli_connect_errno($link)) {
