@@ -1,8 +1,10 @@
 <?php
-ob_start();
-class MyDatabase {
 
-    function MyDatabase($DBhostname, $DBusername, $DBpassword, $DBdatabase) { //didn't think it would act as a constructor 
+ob_start();
+
+class database {
+
+    function database($DBhostname, $DBusername, $DBpassword, $DBdatabase) { //didn't think it would act as a constructor 
         global $link;
         $link = mysqli_connect($DBhostname, $DBusername, $DBpassword, $DBdatabase);
         if (mysqli_connect_errno($link)) {
@@ -59,28 +61,27 @@ class MyDatabase {
         $result->close();
     }
 
-    //testing...
     function prepared_connect($DBhostname, $DBusername, $DBpassword, $DBdatabase) {
         global $db;
         $db = new PDO('mysql:dbname=' . $DBdatabase . ';host=' . $DBhostname . '', $DBusername, $DBpassword);
     }
 
-    //testing...
     function prepared_query($query, $array) {
         global $db;
         $sql = $db->prepare($query);
-        if(!$sql){
+        if (!$sql) {
             echo $db->errorInfo();
         }
         $sql->execute($array);
+        if (!$sql->execute()) {
+            echo $sql->errorInfo();
+        }
         return $sql;
-    }  
-    
-    
-    
+    }
+
 }
 
-class MyFunctions {
+class functions {
 
     //This must be excuted before anything else.
     function redirect($url) {
@@ -93,7 +94,7 @@ class MyFunctions {
         error_reporting($value);
         ini_set('display_errors', $value);
     }
-    
+
     //good for urls or salts maybe.
     function unique_id($var) {
         return strtoupper(uniqid(strtoupper($var) . '_'));
@@ -389,5 +390,7 @@ class MyFunctions {
         }
         return "$difference " . $periods[$j] . " $tense";
     }
+
 }
-ob_clean(); 
+
+ob_clean();
